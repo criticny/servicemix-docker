@@ -1,0 +1,58 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: 2018-07-12T06:01:25Z
+  generation: 1
+  labels:
+    run: servicemix-test
+  name: servicemix-test
+  namespace: default
+  resourceVersion: "901"
+  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/servicemix-test
+  uid: 0277fa83-8599-11e8-8b2a-42010a940141
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: servicemix-test
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: servicemix-test
+    spec:
+      containers:
+      - image: gcr.io/concise-option-173717/servicemix-test:v1
+        imagePullPolicy: IfNotPresent
+        name: servicemix-test
+        ports:
+        - containerPort: 8181
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - name: servicemix-deploy
+          mountPath: /deploy
+        resources: {}
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: servicemix-deploy
+        gcePersistentDisk:
+          pdName: servicemix-test-permstore
+          fsType: ext4

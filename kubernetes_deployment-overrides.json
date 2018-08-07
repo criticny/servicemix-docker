@@ -1,0 +1,24 @@
+{
+  "spec": {
+    "template": {
+      "spec": {
+        "containers": [
+          {
+            "volumeMounts": [{
+              "name": "servicemix-deploy",
+              "mountPath": "/deploy"
+            }],
+            "resources":{}
+          }
+        ],
+        "volumes": [{
+          "name": "servicemix-deploy",
+          "gcePersistentDisk": {
+            "pdName": "servicemix-test-permstore",
+            "fsType": "ext4"
+          }
+        }]
+      }
+    }
+  }
+}

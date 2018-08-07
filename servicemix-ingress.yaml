@@ -1,0 +1,8 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: authentek-smx-ingress
+spec:
+  backend:
+    serviceName: pe2e-sevicemix-2
+    servicePort: 8101

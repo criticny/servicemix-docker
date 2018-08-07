@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+  name: servicemix-deploy
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 25Gi
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: gitlab-config-storage
+    namespace: gitlab
+  gcePersistentDisk:
+    pdName: <name_of_the_gke_disk>
+  persistentVolumeReclai

@@ -1,6 +1,10 @@
 Apache ServiceMix Docker image
 ==============================
 
+Run GKE (MZB)
+-------------
+kubectl run servicemix-test --image=gcr.io/${PROJECT_ID}/servicemix-test:v1 --port=1099 --port=8101 --port=61616 --port=36888 --port=44444
+
 Run
 ---
 

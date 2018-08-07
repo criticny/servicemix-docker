@@ -1,5 +1,5 @@
 FROM java:8-jdk
-MAINTAINER mkroli
+MAINTAINER criticny
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 
 ENV SERVICEMIX_VERSION_MAJOR=7
@@ -12,7 +12,11 @@ RUN wget http://www-us.apache.org/dist/servicemix/servicemix-${SERVICEMIX_VERSIO
     rm -f apache-servicemix-${SERVICEMIX_VERSION}.zip; \
     ln -s /opt/apache-servicemix-${SERVICEMIX_VERSION} /opt/servicemix; \
     mkdir /deploy; \
+    mkdir apache-servicemix-${SERVICEMIX_VERSION}/conf; \
     sed -i 's/^\(felix\.fileinstall\.dir\s*=\s*\).*$/\1\/deploy/' /opt/servicemix/etc/org.apache.felix.fileinstall-deploy.cfg
+
+COPY authentek.features.xml /opt/apache-servicemix-${SERVICEMIX_VERSION}/conf/
+COPY org.apache.karaf.features.cfg.LATEST /opt/apache-servicemix-${SERVICEMIX_VERSION}/etc/org.apache.karaf.features.cfg
 
 VOLUME ["/deploy"]
 EXPOSE 1099 8101 8181 61616 44444
